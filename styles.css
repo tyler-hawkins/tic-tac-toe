@@ -1,0 +1,19 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	height: 800px;
+	width: 800px;
+}
+
+.board {
+	display: grid;
+	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+	height: 600px;
+	width: 600px;
+	overflow: hidden;
+}
+
+.field {
+	background-color: aliceblue;
+	outline: 2px solid black;
+}
