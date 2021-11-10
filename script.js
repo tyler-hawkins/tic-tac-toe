@@ -1,50 +1,73 @@
 const board = (() => {
 	let board = new Array(9);
 
-	const getBoard = (pos) => {
-		if (pos > board.length) {
-			return Error(`Position ${pos} out of bounds.`);
-		}
-		return board[pos];
-	}
-
-	const setBoard = (pos, val) => { 
-		if (pos > board.length) {
-			return Error(`Position ${pos} out of bounds.`);
-		}
-		board[pos] = val;
+	const getField = (pos) => {
+		return (pos > board.length) ? Error(`Position ${pos} out of bounds.`) : 
+		board[pos];
 	};
 
+	const setField = (pos, val) => { 
+		return (pos > board.length) ? Error(`Position ${pos} out of bounds.`) : 
+		board[pos] = val;
+	};
 	const reset = () => {
 		board = new Array(9);
-	}
+	};
 
-	return {getBoard, setBoard, reset};
-
+	return {getField, setField, reset};
 })();
 
-const Player = (name, symbol) => {
-	this.name = name;
-	this.symbol = symbol;
-	
-	const getName = () => {
-		return this.name;
-	}
-
-	const getSymbol = () => {
-		return this.symbol;
-	}
-
+const Player = (name, symbol) => {	
+	const getName = () =>  name;
+	const getSymbol = () => symbol;
 	return {getName, getSymbol};
 };
 
-// Testing
-console.log(board.getBoard(4)); // undefined
-console.log(board.setBoard(4, "X")); // => "X"
-console.log(board.getBoard(4)); // "X"
-console.log(board.reset());
-console.log(board.setBoard(4, "O")); // => "X"
-console.log(board.getBoard(4)); // "X"
-let p1 = Player("Tyler", "X");
-console.log(p1.getName());
+const display = (() => {
+	const fields = document.querySelectorAll(".field");
+	const restartBtn = document.getElementById("restart");
 
+	fields.forEach((field, index) => {
+		field.addEventListener("click", (e) => {
+			console.log(`Clicked ${index}`);
+			game.play(index);
+			updateFields();
+		})
+	});
+
+	restartBtn.addEventListener("click", () => {
+		game.reset();
+	})
+
+	const updateFields = () => {
+		fields.forEach((field, index) => {
+			field.textContent = board.getField(index);
+		});
+	}
+
+	return {updateFields};
+})();
+
+const game = (() => {	
+	const p2 = Player("John", "O");	
+	const p1 = Player("Tyler", "X");
+	let currentPlayer = p1;
+
+	const play = (index) => {
+		board.setField(index, currentPlayer.getSymbol());
+		display.updateFields();
+		setCurrentPlayer(currentPlayer == p1 ? p2 : p1);
+	}
+
+	const setCurrentPlayer = (player) => {
+		currentPlayer = player;
+	}
+
+	const reset = () => {
+		setCurrentPlayer(p1);
+		board.reset();
+		display.updateFields();
+	}
+
+	return {play, reset, setCurrentPlayer};
+})();
