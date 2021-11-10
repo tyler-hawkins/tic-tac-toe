@@ -10,6 +10,7 @@ const board = (() => {
 		return (pos > board.length) ? Error(`Position ${pos} out of bounds.`) : 
 		board[pos] = val;
 	};
+	
 	const reset = () => {
 		board = new Array(9);
 	};
