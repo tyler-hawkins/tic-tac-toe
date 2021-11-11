@@ -150,5 +150,7 @@ const game = (() => {
 		display.showMessage(`${getCurrentPlayer().getName()}'s turn.`);
 	}
 
+	display.showMessage(`${getCurrentPlayer().getName()}'s turn.`);
+
 	return {play, reset, getCurrentPlayer, getIsOver};
 })();
