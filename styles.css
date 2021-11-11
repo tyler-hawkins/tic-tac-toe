@@ -1,6 +1,13 @@
-.wrapper {
+body {
 	display: flex;
 	justify-content: center;
+}
+
+.wrapper {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
 	height: 800px;
 	width: 800px;
 }
@@ -16,4 +23,46 @@
 .field {
 	background-color: aliceblue;
 	outline: 2px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial, sans-serif;
+	font-size: 72px;
+	user-select: none;
+}
+
+.field:hover {
+	background-color: lightblue;
+}
+
+.menu {
+	padding-top: 25px;
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+}
+
+.menu #message {
+	background-color: rgb(230, 230, 230);
+	font-family: Arial, sans-serif;
+	font-size: 36px;
+	padding: 10px 150px;
+	border-radius: 20px;
+}
+
+.menu #restart {
+	width: 5rem;
+	height: 2rem;
+	background-color: darkgreen;
+	border: none;
+	color: white;
+	border-radius: 8px;	
+}
+
+.menu #restart:hover {
+	filter: brightness(125%);
+}
+
+.menu #restart:active {
+	transform: translateY(2px);
 }
