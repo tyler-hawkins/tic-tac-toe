@@ -148,6 +148,7 @@ const game = (() => {
 		board.reset();
 		display.updateFields();
 		display.showMessage(`${getCurrentPlayer().getName()}'s turn.`);
+		setIsOver(false);
 	}
 
 	display.showMessage(`${getCurrentPlayer().getName()}'s turn.`);
